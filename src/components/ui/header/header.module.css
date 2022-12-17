@@ -1,0 +1,32 @@
+.main {
+  width: 100%;
+  display: flex;
+  background-color: #ffffff;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+  padding: 0 40px;
+}
+.main nav,
+.main nav a,
+.main button {
+  display: flex;
+  align-items: center;
+}
+.main nav a {
+  text-decoration: none;
+  color: #000000;
+}
+.main nav a:first-child {
+  margin-right: 25px;
+}
+.main nav a svg,
+.btn .bell {
+  margin-right: 10px;
+}
+.btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
