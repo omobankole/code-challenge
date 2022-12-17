@@ -1,7 +1,9 @@
 import classes from "./login.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import CheckboxLabel from "../../components/checkbox/checkbox";
+import CheckboxLabel from "../../components/ui/input/checkbox/checkbox";
 import { useState } from "react";
+import Input from "../../components/ui/input/input";
+import { emailCheck } from "../../utils";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,24 +26,30 @@ const Login = () => {
   };
   return (
     <form className={classes.main}>
-      <div>
+      <div className={classes.loginContent}>
         <h3>Log In</h3>
         <p>Welcome back! Please enter your details.</p>
       </div>
       <div className={classes.inputs}>
-        <input
+        <Input
+          errorMessage="Please enter a valid email"
           value={payload.email}
-          name="email"
+          isValid={emailCheck(payload.email)}
+          onChange={handleChange}
+          label="Email"
           type="email"
-          placeholder="Email"
-          onChange={handleChange}
+          name="email"
+          size="large"
         />
-        <input
-          value={payload.password}
-          name="password"
+        <Input
+          errorMessage="Please enter a valid password"
+          label="Password"
           type={type ? "password" : "text"}
-          placeholder="Password"
+          value={payload.password}
+          isValid={payload.password.length > 8}
           onChange={handleChange}
+          name="password"
+          size="large"
         />
         <div className={classes.showPass}>
           <CheckboxLabel text="Show Password" onChange={() => setType(!type)} />
