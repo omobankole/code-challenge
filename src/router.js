@@ -23,7 +23,7 @@ const Routes = () => {
       element: <DashboardLayout />,
       children: [
         {
-          path: "/dashboard",
+          path: "/dashboard/challenge",
           element: <Challenge />,
         },
         {
