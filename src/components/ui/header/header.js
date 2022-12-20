@@ -7,13 +7,17 @@ const Header = () => {
   return (
     <header className={classes.main}>
       <nav>
-        <NavLink to="/dashboard">
-          {" "}
+        <NavLink
+          to="/dashboard/challenge"
+          className={({ isActive }) => (isActive ? classes.active : "")}
+        >
           <Question />
           Challenge
         </NavLink>
-        <NavLink to="/dashboard/scoreboard">
-          {" "}
+        <NavLink
+          to="/dashboard/scoreboard"
+          className={({ isActive }) => (isActive ? classes.active : "")}
+        >
           <Score />
           Scoreboard
         </NavLink>

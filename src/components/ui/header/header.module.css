@@ -33,3 +33,9 @@
   background-color: transparent;
   cursor: pointer;
 }
+.main nav a.active {
+  color: #123eaf;
+}
+.active svg path {
+  fill: #123eaf;
+}

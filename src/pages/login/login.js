@@ -22,7 +22,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(payload);
-    navigate("/dashboard");
+    navigate("/dashboard/challenge");
   };
   return (
     <form className={classes.main}>
