@@ -1,8 +1,19 @@
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const Input = ({ label, errorMessage, value, onChange, isValid, ...props }) => {
+const   Input = ({
+  label,
+  errorMessage,
+  value,
+  onChange,
+  isValid,
+  id,
+  endAdornment,
+  htmlFor,
+  ...InputProps
+}) => {
   const [error, setError] = useState(false);
   const handleBlur = () => {
     if (!isValid) setError(true);
@@ -21,24 +32,27 @@ const Input = ({ label, errorMessage, value, onChange, isValid, ...props }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <TextField
-          color="purple"
-          id="outlined-basic"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          {...props}
-          helperText={error ? `${errorMessage}` : ""}
-          error={error}
-          onBlur={handleBlur}
-          defaultValue={value}
-          onChange={(e) => onChange(e)}
-          label={
-            <span style={{ fontSize: "18px", fontFamily: "Raleway" }}>
-              {label}
-            </span>
-          }
-        />
+        <FormControl fullWidth>
+          <TextField
+            color="purple"
+            id={id}
+            htmlFor={htmlFor}
+            variant="outlined"
+            margin="normal"
+            endAdornment={endAdornment}
+            {...InputProps}
+            helperText={error ? `${errorMessage}` : ""}
+            error={error}
+            onBlur={handleBlur}
+            defaultValue={value}
+            onChange={(e) => onChange(e)}
+            label={
+              <span style={{ fontSize: "18px", fontFamily: "Raleway" }}>
+                {label}
+              </span>
+            }
+          />
+        </FormControl>
       </ThemeProvider>
     </>
   );
