@@ -5,6 +5,7 @@ import DashboardLayout from "./layouts/dashboardLayount/dashboardLayout";
 import Challenge from "./pages/challenge/challenge";
 import Login from "./pages/login/login";
 import Scoreboard from "./pages/scoreboard/scoreboard";
+import Scoreboard2 from "./pages/scoreboard2/scoreboard2";
 
 const Routes = () => {
   return useRoutes([
@@ -31,6 +32,10 @@ const Routes = () => {
           element: <Scoreboard />,
         },
       ],
+    },
+    {
+      path: "/dashboard/scoreboard2",
+      element: <Scoreboard2 />
     },
   ]);
 };
