@@ -10,6 +10,7 @@ import PasswordModal from "../../components/parentModal/passwordModal/passwordMo
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState();
   const [type, setType] = useState(true);
   const [modal, setModal] = useState(false);
 
@@ -28,15 +29,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await login(payload);
       localStorage.setItem("access", response.data.access);
       if (!jwt.decode(response.data.access).has_changed_password) {
         setModal(true);
       } else {
         navigate("/dashboard/challenge");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   return (
@@ -74,7 +78,9 @@ const Login = () => {
             />
             <Link>Forget Password</Link>
           </div>
-          <button onClick={handleSubmit}>Log In</button>
+          <button onClick={handleSubmit}>
+            {loading ? "Loading" : "Log In"}
+          </button>
         </div>
       </form>
       {modal && <PasswordModal setModal={setModal} />}

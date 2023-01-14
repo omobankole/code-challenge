@@ -8,3 +8,7 @@ export const password = async (data) => {
   const response = await Url.put("/change-password", data);
   return response;
 };
+export const user = async () => {
+  const response = await Url.get("/user");
+  return response;
+};

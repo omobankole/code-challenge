@@ -8,6 +8,7 @@ import CheckboxLabel from "../../ui/input/checkbox/checkbox";
 
 const PasswordModal = ({ setModal }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState();
   const [type, setType] = useState(true);
   const [payload, setPayload] = useState({
     password: "",
@@ -28,10 +29,13 @@ const PasswordModal = ({ setModal }) => {
     };
     console.log(data);
     try {
+      setLoading(true);
       const response = await password(data);
       navigate("/dashboard/challenge");
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   return (
@@ -63,7 +67,9 @@ const PasswordModal = ({ setModal }) => {
             size="large"
           />
           <CheckboxLabel text="Show Password" onChange={() => setType(!type)} />
-          <button onClick={handleSubmit}>Continue</button>
+          <button onClick={handleSubmit}>
+            {loading ? "Loading" : "Continue"}
+          </button>
         </div>
       </form>
     </ParentModal>
