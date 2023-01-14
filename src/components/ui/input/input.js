@@ -3,15 +3,13 @@ import FormControl from "@mui/material/FormControl";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const   Input = ({
+const Input = ({
   label,
   errorMessage,
   value,
   onChange,
   isValid,
   id,
-  endAdornment,
-  htmlFor,
   ...InputProps
 }) => {
   const [error, setError] = useState(false);
@@ -36,10 +34,8 @@ const   Input = ({
           <TextField
             color="purple"
             id={id}
-            htmlFor={htmlFor}
             variant="outlined"
             margin="normal"
-            endAdornment={endAdornment}
             {...InputProps}
             helperText={error ? `${errorMessage}` : ""}
             error={error}

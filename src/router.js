@@ -5,6 +5,7 @@ import DashboardLayout from "./layouts/dashboardLayount/dashboardLayout";
 import Challenge from "./pages/challenge/challenge";
 import Login from "./pages/login/login";
 import Scoreboard from "./pages/scoreboard/scoreboard";
+import { ProtectedRoutes } from "./services/protectedRoute";
 
 const Routes = () => {
   return useRoutes([
@@ -20,7 +21,7 @@ const Routes = () => {
     },
     {
       path: "/dashboard",
-      element: <DashboardLayout />,
+      element: ProtectedRoutes(DashboardLayout),
       children: [
         {
           path: "/dashboard/challenge",

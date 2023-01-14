@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { ReactComponent as Question } from "../../../assets/images/challenge.svg";
 import { ReactComponent as Score } from "../../../assets/images/score.svg";
 import { ReactComponent as Bell } from "../../../assets/images/bell.svg";
-const Header = () => {
+const Header = ({ setShowNotify }) => {
   return (
     <header className={classes.main}>
       <nav>
@@ -22,7 +22,10 @@ const Header = () => {
           Scoreboard
         </NavLink>
       </nav>
-      <button className={classes.btn}>
+      <button
+        className={classes.btn}
+        onClick={() => setShowNotify((prev) => !prev)}
+      >
         <Bell className={classes.bell} />
         Notification
       </button>

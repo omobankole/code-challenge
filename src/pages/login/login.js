@@ -4,10 +4,15 @@ import CheckboxLabel from "../../components/ui/input/checkbox/checkbox";
 import { useState } from "react";
 import Input from "../../components/ui/input/input";
 import { emailCheck } from "../../utils";
+import { login } from "../../services/api";
+import jwt from "jsonwebtoken";
+import PasswordModal from "../../components/parentModal/passwordModal/passwordModal";
 
 const Login = () => {
   const navigate = useNavigate();
   const [type, setType] = useState(true);
+  const [modal, setModal] = useState(false);
+
   const [payload, setPayload] = useState({
     email: "",
     password: "",
@@ -19,45 +24,61 @@ const Login = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(payload);
-    navigate("/dashboard/challenge");
+    try {
+      const response = await login(payload);
+      localStorage.setItem("access", response.data.access);
+      if (!jwt.decode(response.data.access).has_changed_password) {
+        setModal(true);
+      } else {
+        navigate("/dashboard/challenge");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
-    <form className={classes.main}>
-      <div className={classes.loginContent}>
-        <h3>Log In</h3>
-        <p>Welcome back! Please enter your details.</p>
-      </div>
-      <div className={classes.inputs}>
-        <Input
-          errorMessage="Please enter a valid email"
-          value={payload.email}
-          isValid={emailCheck(payload.email)}
-          onChange={handleChange}
-          label="Email"
-          type="email"
-          name="email"
-          size="large"
-        />
-        <Input
-          errorMessage="Please enter a valid password"
-          label="Password"
-          type={type ? "password" : "text"}
-          value={payload.password}
-          isValid={payload.password.length > 8}
-          onChange={handleChange}
-          name="password"
-          size="large"
-        />
-        <div className={classes.showPass}>
-          <CheckboxLabel text="Show Password" onChange={() => setType(!type)} />
-          <Link>Forget Password</Link>
+    <>
+      <form className={classes.main}>
+        <div className={classes.loginContent}>
+          <h3>Log In</h3>
+          <p>Welcome back! Please enter your details.</p>
         </div>
-        <button onClick={handleSubmit}>Log In</button>
-      </div>
-    </form>
+        <div className={classes.inputs}>
+          <Input
+            errorMessage="Please enter a valid email"
+            value={payload.email}
+            isValid={emailCheck(payload.email)}
+            onChange={handleChange}
+            label="Email"
+            type="email"
+            name="email"
+            size="large"
+          />
+          <Input
+            errorMessage="Please enter a valid password"
+            label="Password"
+            type={type ? "password" : "text"}
+            value={payload.password}
+            isValid={payload.password.length > 3}
+            onChange={handleChange}
+            name="password"
+            size="large"
+          />
+          <div className={classes.showPass}>
+            <CheckboxLabel
+              text="Show Password"
+              onChange={() => setType(!type)}
+            />
+            <Link>Forget Password</Link>
+          </div>
+          <button onClick={handleSubmit}>Log In</button>
+        </div>
+      </form>
+      {modal && <PasswordModal setModal={setModal} />}
+    </>
   );
 };
 
