@@ -1,0 +1,33 @@
+.main {
+  width: 492px;
+  min-height: 300px;
+  padding: 40px 30px 30px;
+  background: #ffffff;
+  border-radius: 4px 0px 4px 4px;
+  box-shadow: 0 0 24px 0 rgb(0 0 0 / 4%);
+  position: absolute;
+  top: 65px;
+  right: 0;
+}
+.main button {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  background-color: transparent;
+  border: 0;
+  color: #bc2a2a;
+  display: flex;
+  align-items: center;
+}
+.inbox {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.main .inbox:not(:last-child) {
+  margin-bottom: 10px;
+}
+.inbox span {
+  display: block;
+  margin-right: 5px;
+}

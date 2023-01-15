@@ -1,18 +1,18 @@
 import classes from "./dashboardLayout.module.css";
 import { Outlet } from "react-router";
 import Header from "../../components/ui/header/header";
-import PasswordModal from "../../components/parentModal/passwordModal/passwordModal";
+import Notification from "../../components/notification/notification";
 import { useState } from "react";
 
 const DashboardLayout = () => {
-  const [modal, setModal] = useState(false);
+  const [showNotify, setShowNotify] = useState(false);
+
   return (
     <div className={classes.main}>
-      <Header />
+      <Header setShowNotify={setShowNotify} />
       <div className={classes.content}>
-        <Outlet />
-        {modal && <PasswordModal setModal={setModal} />}
-        <button onClick={() => setModal(true)}>open</button>
+          <Outlet />
+        {showNotify && <Notification />}
       </div>
     </div>
   );
