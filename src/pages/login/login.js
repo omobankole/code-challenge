@@ -32,6 +32,7 @@ const Login = () => {
       setLoading(true);
       const response = await login(payload);
       localStorage.setItem("access", response.data.access);
+      localStorage.setItem("refresh", response.data.refresh);
       if (!jwt.decode(response.data.access).has_changed_password) {
         setModal(true);
       } else {
