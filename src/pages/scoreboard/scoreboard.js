@@ -6,9 +6,7 @@ import User from "../../assets/images/users.png";
 import Point from "../../assets/images/point.png";
 
 const Scoreboard = () => {
-  const Headers = [
-    "Rank", "Users", "Point"
-  ]
+  
   const body = [
     [1, "James Daniel", "22 pts"],
     [2, "James Daniel", "22 pts"],
@@ -27,17 +25,17 @@ const Scoreboard = () => {
             
               <th>
                 <div className={classes.header}>
-                  <img src={Rank} alt="" /><span>Rank</span>
+                  <img src={Rank} alt="rank" /><span>Rank</span>
                 </div>
               </th>
               <th>
               <div className={classes.header}>
-                  <img src={User} alt="" /><span>Users</span>
+                  <img src={User} alt="user" /><span>Users</span>
                 </div>
               </th>
               <th>
               <div className={classes.header}>
-                  <img src={Point} alt="" /><span>Points</span>
+                  <img src={Point} alt="point" /><span>Points</span>
                 </div>
               </th>
             
