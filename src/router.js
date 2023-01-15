@@ -5,11 +5,8 @@ import DashboardLayout from "./layouts/dashboardLayount/dashboardLayout";
 import Challenge from "./pages/challenge/challenge";
 import Login from "./pages/login/login";
 import Scoreboard from "./pages/scoreboard/scoreboard";
-<<<<<<< HEAD
 import Scoreboard2 from "./pages/scoreboard2/scoreboard2";
-=======
 import { ProtectedRoutes } from "./services/protectedRoute";
->>>>>>> 397af5cdf0705850b64208a63993146d02109b83
 
 const Routes = () => {
   return useRoutes([
