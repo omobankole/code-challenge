@@ -4,14 +4,15 @@ import classes from "./challenge.module.css";
 import { ReactComponent as Shuffle } from "../../assets/images/shuffle.svg";
 import QuestionModal from "../../components/parentModal/questionModal/questionModal";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Challenge = () => {
   const [modal, setModal] = useState(false);
   return (
     <div className={classes.main}>
-      <button className={classes.shuffle}>
+      <Link to="/dashboard/scoreboard2" className={classes.shuffle}>
         <Shuffle /> Pick Random
-      </button>
+      </Link>
       <div className={classes.card}>
         {cardData.map((item, i) => (
           <Card {...item} key={i} setModal={setModal} />

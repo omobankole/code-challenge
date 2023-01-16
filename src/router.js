@@ -31,12 +31,14 @@ const Routes = () => {
         {
           path: "/dashboard/scoreboard",
           element: <Scoreboard />,
+          children: [
+            {
+              path: "/dashboard/scoreboard/score",
+              element: <Scoreboard2 />,
+            },
+          ]
         },
       ],
-    },
-    {
-      path: "/dashboard/scoreboard2",
-      element: <Scoreboard2 />
     },
   ]);
 };
