@@ -7,6 +7,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Challenge = () => {
+  const [cardData, setCardData] = useState([{}]);
+  console.log(cardData);
   const [modal, setModal] = useState(false);
   return (
     <div className={classes.main}>
@@ -15,9 +17,17 @@ const Challenge = () => {
       </Link>
       <div className={classes.card}>
         {cardData.map((item, i) => (
-          <Card {...item} key={i} setModal={setModal} />
+          <Card
+            {...item}
+            key={i}
+            setModal={setModal}
+            setCardData={setCardData}
+            cardData={cardData}
+          />
         ))}
-        {modal && <QuestionModal setModal={setModal} />}
+        {modal && (
+          <QuestionModal setModal={setModal} cardData={cardData} />
+        )}
       </div>
     </div>
   );

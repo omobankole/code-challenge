@@ -16,3 +16,7 @@ export const user = async () => {
   const response = await Url.get("/user");
   return response;
 };
+export const question = async () => {
+  const response = await Url.get("/questions");
+  return response;
+};

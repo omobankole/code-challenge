@@ -6,7 +6,7 @@ import Challenge from "./pages/challenge/challenge";
 import Login from "./pages/login/login";
 import Scoreboard from "./pages/scoreboard/scoreboard";
 import Scoreboard2 from "./pages/scoreboard2/scoreboard2";
-import { ProtectedRoutes } from "./services/protectedRoute";
+import { ProtectedRoutes } from "./services/protectedRoutes";
 
 const Routes = () => {
   return useRoutes([
