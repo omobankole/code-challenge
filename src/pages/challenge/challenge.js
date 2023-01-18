@@ -2,14 +2,28 @@ import Card from "../../components/ui/card/card";
 import { cardData } from "../../constants";
 import classes from "./challenge.module.css";
 import { ReactComponent as Shuffle } from "../../assets/images/shuffle.svg";
-import QuestionModal from "../../components/parentModal/questionModal/questionModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { question } from "../../services/api";
 
 const Challenge = () => {
-  const [cardData, setCardData] = useState([{}]);
-  console.log(cardData);
-  const [modal, setModal] = useState(false);
+  const [cardData, setCardData] = useState([]);
+
+  const getCardDetails = async () => {
+    try {
+      const response = await question();
+      setCardData(response.data.results);
+      console.log(response.data.results);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCardDetails();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className={classes.main}>
       <Link to="/dashboard/scoreboard2" className={classes.shuffle}>
@@ -20,14 +34,11 @@ const Challenge = () => {
           <Card
             {...item}
             key={i}
-            setModal={setModal}
+            index={i}
             setCardData={setCardData}
             cardData={cardData}
           />
         ))}
-        {modal && (
-          <QuestionModal setModal={setModal} cardData={cardData} />
-        )}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import classes from "./questionModal.module.css";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-const QuestionModal = ({ setModal, modal, cardData }) => {
+const QuestionModal = ({ setModal, cardData }) => {
   const [payload, setPayload] = useState({
     answer: "",
   });
@@ -18,22 +18,26 @@ const QuestionModal = ({ setModal, modal, cardData }) => {
     }
     `;
 
+  const handleData = () => {};
+
   return (
-    <ParentModal setModal={setModal} modal={modal}>
+    <ParentModal setModal={setModal}>
       <form className={classes.main}>
-        <p>Use the + operator to concatenate (combine) two strings together.</p>
+        <p>{cardData.title}</p>
         <p>{cardData.description}</p>
         {/* <ul>
           <li>Declare the variable name.</li>
         </ul> */}
-        {/* <div className={classes.code}>
-          <SyntaxHighlighter
-            children={code}
-            language="javascript"
-            showLineNumbers={true}
-            style={coldarkCold}
-          />
-        </div> */}
+        {cardData.question_type === "Code" && (
+          <div className={classes.code}>
+            <SyntaxHighlighter
+              children={code}
+              language="javascript"
+              showLineNumbers={true}
+              style={coldarkCold}
+            />
+          </div>
+        )}
         <input
           type="text"
           placeholder="What is your name?"
