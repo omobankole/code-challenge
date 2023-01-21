@@ -1,6 +1,6 @@
 import classes from "./scoreboard2.module.css";
-import { NavLink } from "react-router-dom";
-import Back from "../../assets/images/back.png";
+// import { NavLink } from "react-router-dom";
+// import Back from "../../assets/images/back.png";
 import Rank from "../../assets/images/rank.png";
 import User from "../../assets/images/users.png";
 
@@ -33,6 +33,7 @@ const Scoreboard2 = () => {
       <div className={classes.content}>
         <p>Number of Solves: 9</p>
         <table className={classes.table}>
+          <thead>
           <tr>
             <th>
               <div className={classes.header}>
@@ -47,6 +48,8 @@ const Scoreboard2 = () => {
               </div>
             </th>
           </tr>
+          </thead>
+          <tbody>
           {body.map((row, i) => (
             <tr key={i}>
               {row.map((val, i) => (
@@ -54,6 +57,7 @@ const Scoreboard2 = () => {
               ))}
             </tr>
           ))}
+          </tbody>
         </table>
       </div>
     </div>
