@@ -1,4 +1,3 @@
-import React from "react";
 import { useRoutes } from "react-router";
 import Auth from "./layouts/Auth/authLayout";
 import DashboardLayout from "./layouts/dashboardLayount/dashboardLayout";

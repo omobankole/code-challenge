@@ -1,18 +1,38 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { question } from "../../../services/api";
+import { useState } from "react";
+import ErrorModal from "../../parentModal/errorModal/errorModal";
+import SuccessModal from "../../parentModal/successModal/successModal";
 import QuestionModal from "../../parentModal/questionModal/questionModal";
 import classes from "./card.module.css";
 
 const Card = ({ category, name, cardData, index }) => {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState("");
+  const [status, setStatus] = useState({});
 
   return (
     <>
-      {modal && (
-        <QuestionModal setModal={setModal} cardData={cardData[index]} />
+      {modal === "question" && (
+        <QuestionModal
+          setModal={setModal}
+          cardData={cardData[index]}
+          status={status}
+          setStatus={setStatus}
+        />
       )}
-      <div className={classes.main} onClick={() => setModal(true)}>
+      {modal === "answer" && (
+        <SuccessModal
+          setModal={setModal}
+          cardData={cardData[index]}
+          status={status}
+        />
+      )}
+      {modal === "error" && (
+        <ErrorModal
+          setModal={setModal}
+          cardData={cardData[index]}
+          status={status}
+        />
+      )}
+      <div className={classes.main} onClick={() => setModal("question")}>
         <p className={classes.complex}>
           {category === "H" ? "Hard" : category === "M" ? "Medium" : "Easy"}
         </p>
