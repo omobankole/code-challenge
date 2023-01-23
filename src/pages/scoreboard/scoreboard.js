@@ -21,6 +21,7 @@ const Scoreboard = () => {
   return (
     <div>
       <table className={classes.table}>
+        <thead>
           <tr>
             
               <th>
@@ -40,15 +41,18 @@ const Scoreboard = () => {
               </th>
             
           </tr>
-          {body.map((row) => (
-            <tr>
-              {row.map((val) => (
-                <td>
+          </thead>
+          <tbody>
+          {body.map((row, i) => (
+            <tr key={i}>
+              {row.map((val, i) => (
+                <td key={i}>
                   {val}
                 </td>
               ))}
             </tr>
           ))}
+          </tbody>
        
       </table>
     </div>
