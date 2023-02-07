@@ -6,7 +6,7 @@ import classes from "./card.module.css";
 
 const Card = ({ category, name, cardData, index }) => {
   const [modal, setModal] = useState("");
-  const [status, setStatus] = useState({});
+  const [answerResp, setAnswerResp] = useState({});
 
   return (
     <>
@@ -14,22 +14,21 @@ const Card = ({ category, name, cardData, index }) => {
         <QuestionModal
           setModal={setModal}
           cardData={cardData[index]}
-          status={status}
-          setStatus={setStatus}
+          answerResp={answerResp}
+          setanswerResp={setAnswerResp}
         />
       )}
       {modal === "answer" && (
         <SuccessModal
           setModal={setModal}
           cardData={cardData[index]}
-          status={status}
         />
       )}
       {modal === "error" && (
         <ErrorModal
           setModal={setModal}
           cardData={cardData[index]}
-          status={status}
+          answerResp={answerResp}
         />
       )}
       <div className={classes.main} onClick={() => setModal("question")}>

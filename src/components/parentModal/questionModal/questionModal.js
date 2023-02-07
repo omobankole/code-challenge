@@ -4,23 +4,24 @@ import classes from "./questionModal.module.css";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { answer } from "../../../services/api";
+import { Link } from "react-router-dom";
 
-const QuestionModal = ({ setModal, cardData, status, setStatus }) => {
+const QuestionModal = ({ setModal, cardData, answerResp, setAnswerResp }) => {
   const [payload, setPayload] = useState({
     answer: "",
   });
   const id = cardData.id;
+  console.log(id)
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(payload);
     try {
       const response = await answer(id, payload);
-      setStatus(response.data);
-      console.log(response.data);
-      if (!status.status) {
+      setAnswerResp(response.data);
+      if (answerResp.status === false) {
         console.log("Yeeeh");
         setModal("error");
-      } else {
+      } else if (answerResp.status === true) {
         console.log("ooops");
         setModal("answer");
       }
@@ -28,7 +29,7 @@ const QuestionModal = ({ setModal, cardData, status, setStatus }) => {
       console.log(error);
     }
   };
-  console.log(status);
+  // console.log(status);
   return (
     <ParentModal setModal={setModal}>
       <form className={classes.main}>
@@ -46,7 +47,7 @@ const QuestionModal = ({ setModal, cardData, status, setStatus }) => {
           )}
           <input
             type="text"
-            placeholder="What is your name?"
+            placeholder={`Hints ${cardData.encoded}`}
             name="answer"
             value={payload.answer}
             onChange={(e) =>
@@ -56,8 +57,9 @@ const QuestionModal = ({ setModal, cardData, status, setStatus }) => {
               }))
             }
           />
-          <div className={classes.btn}>
+          <div className={classes.button}>
             <button onClick={handleSubmit}>Submit</button>
+            <Link to={`/dashboard/scoreboard/game/${id}`}>Solve</Link>
           </div>
         </div>
       </form>

@@ -20,6 +20,10 @@ export const question = async () => {
   const response = await Url.get("/questions");
   return response;
 };
+export const solves = async (id) => {
+  const response = await Url.get(`/questions/ATC/${id}/solves`);
+  return response;
+};
 export const answer = async (id, payload) => {
   const response = await Url.post(`/answers/ATC/${id}`, payload);
   return response;

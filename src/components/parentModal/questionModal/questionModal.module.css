@@ -23,8 +23,13 @@
 .main input:focus {
   border: 3px solid rgba(18, 78, 175, 0.2);
 }
-.main button {
-  width: 40%;
+.button {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.button button {
+  width: 35%;
   padding: 20px 10px;
   background: #124eaf;
   border-radius: 4px;
@@ -32,15 +37,19 @@
   margin-top: 30px;
   border: 1px solid #124eaf;
   outline: none;
-  transition: all 0.5s;
+  transition: all 0.5s ease-in-out;
   font-size: 17px;
-}
-.main button:hover {
-  background: #ffffff;
-  color: #124eaf;
+  cursor: pointer;
   font-weight: 500;
 }
-.btn {
-  display: flex;
-  justify-content: center;
+.button button:hover {
+  background: #ffffff;
+  color: #124eaf;
+}
+.button a {
+  padding: 5px 10px;
+  color: #124eaf;
+  text-decoration: none;
+  border: 1px solid #124eaf;
+  border-radius: 2px;
 }

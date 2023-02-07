@@ -1,6 +1,6 @@
 import axios from "axios";
-// export const baseUrl = "https://web-production-d087.up.railway.app/";
-export const baseUrl = "http://192.168.1.4:8000/";
+export const baseUrl = "https://web-production-d087.up.railway.app/";
+// export const baseUrl = "http://192.168.1.22:8000/";
 
 export const Url = axios.create({
   baseURL: `${baseUrl}`,
