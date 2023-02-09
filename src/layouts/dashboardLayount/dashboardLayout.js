@@ -11,8 +11,8 @@ const DashboardLayout = () => {
     <div className={classes.main}>
       <Header setShowNotify={setShowNotify} />
       <div className={classes.content}>
-          <Outlet />
-        {showNotify && <Notification />}
+        <Outlet />
+        {showNotify && <Notification setShowNotify={setShowNotify} />}
       </div>
     </div>
   );

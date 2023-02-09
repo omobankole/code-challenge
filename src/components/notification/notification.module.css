@@ -1,6 +1,7 @@
 .main {
   width: 492px;
-  min-height: 300px;
+  max-width: 492px;
+  height: 320px;
   padding: 40px 30px 30px;
   background: #ffffff;
   border-radius: 4px 0px 4px 4px;
@@ -19,9 +20,14 @@
   display: flex;
   align-items: center;
 }
+.inboxScroll {
+  height: calc(320px - 40px);
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
 .inbox {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
 }
 .main .inbox:not(:last-child) {
@@ -29,5 +35,23 @@
 }
 .inbox span {
   display: block;
-  margin-right: 5px;
+  margin-right: 8px;
+}
+.noNotify {
+  text-align: center;
+}
+.noNotify h3 {
+  margin: 10px 0 25px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+.noNotify span {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 20px;
+  color: #124eaf;
+  border: 1px solid #124eaf;
+  border-radius: 4px;
+  padding: 10px 40px;
 }

@@ -53,3 +53,17 @@
   border: 1px solid #124eaf;
   border-radius: 2px;
 }
+.download {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #124eaf;
+  border-radius: 1px;
+  color: #124eaf;
+  text-decoration: none;
+  margin-top: 17px;
+}
+.download svg {
+  margin-right: 8px;
+}

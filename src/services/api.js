@@ -20,6 +20,14 @@ export const question = async () => {
   const response = await Url.get("/questions");
   return response;
 };
+export const notificationApi = async () => {
+  const response = await Url.get("/notifications/ATC");
+  return response;
+};
+export const deleteNot = async () => {
+  const response = await Url.delete("/notifications/ATC");
+  return response;
+};
 export const solves = async (id) => {
   const response = await Url.get(`/questions/ATC/${id}/solves`);
   return response;
