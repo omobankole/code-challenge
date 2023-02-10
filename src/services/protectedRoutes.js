@@ -1,8 +1,10 @@
 import { Navigate } from "react-router-dom";
-import { autoLogout } from "./autoLogout";
+import { useAuthContext } from "../context/AuthContext";
 
 export const ProtectedRoutes = (Component) => {
-  const validToken = autoLogout();
-  if (!validToken) return <Navigate to="/" replace />;
+  const { state } = useAuthContext();
+
+  if (!state?.user) return <Navigate to="/" replace />;
+
   return <Component />;
 };
