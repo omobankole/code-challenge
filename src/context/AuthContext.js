@@ -66,10 +66,9 @@ const AuthProvider = ({ children }) => {
           dispatch({ type: AUTH_ACTIONS.REFRESH, payload: response });
         } catch (error) {
           dispatch({ type: AUTH_ACTIONS.LOGOUT });
-        } finally {
-          setLoading(false);
         }
       }
+      setLoading(false);
     })();
   }, []);
 
