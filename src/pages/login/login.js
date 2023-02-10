@@ -4,12 +4,16 @@ import CheckboxLabel from "../../components/ui/input/checkbox/checkbox";
 import { useState } from "react";
 import Input from "../../components/ui/input/input";
 import { emailCheck } from "../../utils";
-import { login } from "../../services/api";
+import { login, useApiSdk } from "../../services/api";
 import jwt from "jsonwebtoken";
 import PasswordModal from "../../components/parentModal/passwordModal/passwordModal";
+import { AUTH_ACTIONS, useAuthContext } from "../../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { dispatch } = useAuthContext();
+  const sdk = useApiSdk();
+
   const [loading, setLoading] = useState();
   const [type, setType] = useState(true);
   const [modal, setModal] = useState(false);
@@ -30,8 +34,14 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await login(payload);
-      localStorage.setItem("access", response.data.access);
+      // const response = await login(payload);
+      const response = await sdk.login(payload);
+
+      dispatch({ type: AUTH_ACTIONS.AUTH, payload: response.data });
+
+      const { user_id } = jwt.decode(response.data.access);
+      dispatch({ type: AUTH_ACTIONS.USER, payload: user_id });
+
       if (!jwt.decode(response.data.access).has_changed_password) {
         setModal(true);
       } else {
