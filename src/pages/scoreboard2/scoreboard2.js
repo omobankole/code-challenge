@@ -1,7 +1,7 @@
 import classes from "./scoreboard2.module.css";
 import Rank from "../../assets/images/rank.png";
 import User from "../../assets/images/users.png";
-import { solves } from "../../services/api";
+import { solves, useApiSdk } from "../../services/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
@@ -10,11 +10,12 @@ const Scoreboard2 = () => {
   const [users, setUsers] = useState([]);
   const { id } = useParams();
 
+  const sdk = useApiSdk();
 
   const getUsers = async () => {
     try {
       setLoading(true);
-      const response = await solves(id);
+      const response = await sdk.solves(id);
       // console.log(response)
       setUsers(response.data);
       setLoading(false);
@@ -26,12 +27,10 @@ const Scoreboard2 = () => {
   useEffect(() => {
     getUsers();
   }, []);
-  console.log(users)
+  console.log(users);
 
   const data = [];
-  users.forEach((user, index) =>
-    data.push([index + 1, user.user.username])
-  );
+  users.forEach((user, index) => data.push([index + 1, user.user.username]));
 
   // const data = [
   //   [1, "James Daniel"],
