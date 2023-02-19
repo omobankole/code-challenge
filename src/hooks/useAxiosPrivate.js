@@ -27,14 +27,15 @@ const useAxiosPrivate = () => {
       async (error) => {
         const previous = error?.config;
 
-        if (error?.response?.status === 403 && !previous?.sent) {
-          previous.sent = true;
+        if (error?.response?.status > 400 && !previous?.sent) {
+          const newConfig = { ...previous };
+          newConfig.sent = true;
 
           const response = await refresh();
           dispatch({ type: AUTH_ACTIONS.REFRESH, payload: response });
-          console.log("intercep response token", response);
-          previous.headers["Authorization"] = `Bearer ${response}`;
-          return Url(previous);
+          newConfig.headers["Authorization"] = `Bearer ${response}`;
+
+          return Url(newConfig);
         }
 
         return Promise.reject(error);
