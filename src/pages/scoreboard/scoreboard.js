@@ -4,16 +4,18 @@ import classes from "../scoreboard/scoreboard.module.css";
 import Rank from "../../assets/images/rank.png";
 import User from "../../assets/images/users.png";
 import Point from "../../assets/images/point.png";
-import { user } from "../../services/api";
+import { useApiSdk, user } from "../../services/api";
 
 const Scoreboard = () => {
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
 
+  const sdk = useApiSdk();
+
   const getUsers = async () => {
     try {
       setLoading(true);
-      const response = await user();
+      const response = await sdk.user();
       setUsers(response.data.results);
       setLoading(false);
     } catch (error) {

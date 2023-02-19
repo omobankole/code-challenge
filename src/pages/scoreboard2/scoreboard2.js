@@ -1,7 +1,7 @@
 import classes from "./scoreboard2.module.css";
 import Rank from "../../assets/images/rank.png";
 import User from "../../assets/images/users.png";
-import { solves } from "../../services/api";
+import { solves, useApiSdk } from "../../services/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
@@ -11,10 +11,12 @@ const Scoreboard2 = () => {
   const { id } = useParams();
   const newName = localStorage.getItem("username");
 
+  const sdk = useApiSdk();
+
   const getUsers = async () => {
     try {
       setLoading(true);
-      const response = await solves(id);
+      const response = await sdk.solves(id);
       // console.log(response)
       setUsers(response.data);
       setLoading(false);

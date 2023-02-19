@@ -2,16 +2,18 @@ import Card from "../../components/ui/card/card";
 import classes from "./challenge.module.css";
 import { ReactComponent as Shuffle } from "../../assets/images/shuffle.svg";
 import { useEffect, useState } from "react";
-import { question } from "../../services/api";
+import { question, useApiSdk } from "../../services/api";
+import useRefreshToken from "../../hooks/useRefreshToken";
 
 const Challenge = () => {
+  const apiSdk = useApiSdk();
   const [cardData, setCardData] = useState([]);
 
   const [isChoosen, setIsChoosen] = useState({});
 
   const getCardDetails = async () => {
     try {
-      const response = await question();
+      const response = await apiSdk.question();
       setCardData(response.data.results);
       console.log(response.data.results);
     } catch (error) {
