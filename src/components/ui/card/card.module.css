@@ -5,6 +5,7 @@
   padding: 28px 90px;
   text-align: center;
   cursor: pointer;
+  position: relative;
 }
 
 .main h3 {
@@ -23,4 +24,9 @@
   color: #124eaf;
   font-size: 20px;
   font-family: "Raleway", sans-serif;
+}
+.main > img{
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }

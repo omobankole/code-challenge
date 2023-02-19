@@ -9,7 +9,7 @@ const Scoreboard2 = () => {
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const { id } = useParams();
-
+  const newName = localStorage.getItem("username");
 
   const getUsers = async () => {
     try {
@@ -26,11 +26,14 @@ const Scoreboard2 = () => {
   useEffect(() => {
     getUsers();
   }, []);
-  console.log(users)
+  console.log(users);
 
   const data = [];
   users.forEach((user, index) =>
-    data.push([index + 1, user.user.username])
+    data.push([
+      index + 1,
+      user.user.username === newName ? "you" : user.user.username,
+    ])
   );
 
   // const data = [
@@ -48,7 +51,7 @@ const Scoreboard2 = () => {
   return (
     <div className={classes.main}>
       <div className={classes.content}>
-        <p>Number of Solves: 9</p>
+        <p>Number of Solves: {users.length}</p>
         <table className={classes.table}>
           <thead>
             <tr>

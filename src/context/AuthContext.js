@@ -72,7 +72,7 @@ const AuthProvider = ({ children }) => {
     })();
   }, []);
 
-  if (loading) return <div />;
+  if (loading) return <div><h1>Loading</h1></div>;
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>

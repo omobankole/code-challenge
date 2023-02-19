@@ -22,10 +22,11 @@ const QuestionModal = ({ setModal, cardData, answerResp, setAnswerResp }) => {
     try {
       const response = await answer(id, payload);
       setAnswerResp(response.data);
-      if (answerResp.status === false) {
+      console.log(response.data);
+      if (!answerResp.status) {
         console.log("Yeeeh");
         setModal("error");
-      } else if (answerResp.status === true) {
+      } else {
         console.log("ooops");
         setModal("answer");
       }
@@ -79,7 +80,7 @@ const QuestionModal = ({ setModal, cardData, answerResp, setAnswerResp }) => {
           />
           <div className={classes.button}>
             <button onClick={handleSubmit}>Submit</button>
-            <Link to={`/dashboard/scoreboard/game/${id}`}>Solve</Link>
+            {/* <Link to={`/dashboard/scoreboard/game/${id}`}>Solve</Link> */}
           </div>
         </div>
       </form>

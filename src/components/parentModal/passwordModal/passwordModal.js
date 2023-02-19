@@ -5,8 +5,9 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { password } from "../../../services/api";
 import CheckboxLabel from "../../ui/input/checkbox/checkbox";
+import { toast } from "react-toastify";
 
-const PasswordModal = ({ setModal }) => {
+const PasswordModal = ({ setModal, username }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState();
   const [type, setType] = useState(true);
@@ -36,13 +37,14 @@ const PasswordModal = ({ setModal }) => {
     } catch (error) {
       console.log(error);
       setLoading(false);
+      toast.error(error.response.data.password[0]);
     }
   };
   return (
     <ParentModal setModal={setModal}>
       <form className={classes.main}>
         <div className={classes.content}>
-          <h3>Welcome, Folashaye</h3>
+          <h3>Welcome, {username}</h3>
           <p>Please enter your new password</p>
         </div>
         <div className={classes.input}>

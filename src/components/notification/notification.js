@@ -5,20 +5,6 @@ import { ReactComponent as NoBell } from "../../assets/images/No Bell.svg";
 import { useEffect, useState } from "react";
 import { deleteNot, notificationApi } from "../../services/api";
 
-const notificationData = [
-  {
-    message: "You have gained 10 points for melody challenge Total Points:40",
-  },
-  {
-    message: "You have gained 10 points for melody challenge Total Points:40",
-  },
-  {
-    message: "You have gained 10 points for melody challenge Total Points:40",
-  },
-  {
-    message: "You have gained 10 points for melody challenge Total Points:40",
-  },
-];
 
 const Notification = ({ setShowNotify }) => {
   const [messages, setMessages] = useState([]);

@@ -6,6 +6,7 @@ import Input from "../../components/ui/input/input";
 import { emailCheck } from "../../utils";
 import { login, useApiSdk } from "../../services/api";
 import jwt from "jsonwebtoken";
+import { toast } from "react-toastify";
 import PasswordModal from "../../components/parentModal/passwordModal/passwordModal";
 import { AUTH_ACTIONS, useAuthContext } from "../../context/AuthContext";
 
@@ -14,6 +15,7 @@ const Login = () => {
   const { dispatch } = useAuthContext();
   const sdk = useApiSdk();
 
+  const [username, setUserName] = useState("");
   const [loading, setLoading] = useState();
   const [type, setType] = useState(true);
   const [modal, setModal] = useState(false);
@@ -39,18 +41,25 @@ const Login = () => {
 
       dispatch({ type: AUTH_ACTIONS.AUTH, payload: response.data });
 
-      const { user_id } = jwt.decode(response.data.access);
+      const { user_id, username } = jwt.decode(response.data.access);
+      localStorage.setItem("username", username);
+      setUserName(username);
+      console.log(user_id);
       dispatch({ type: AUTH_ACTIONS.USER, payload: user_id });
 
       if (!jwt.decode(response.data.access).has_changed_password) {
         setModal(true);
+        setLoading(false);
       } else {
         navigate("/dashboard/challenge");
+        console.log(response);
+        toast.success(`Welcome back ${username}`);
         setLoading(false);
       }
     } catch (error) {
       console.log(error);
       setLoading(false);
+      toast.error(error.response.data.detail);
     }
   };
   return (
@@ -93,7 +102,7 @@ const Login = () => {
           </button>
         </div>
       </form>
-      {modal && <PasswordModal setModal={setModal} />}
+      {modal && <PasswordModal setModal={setModal} username={username} />}
     </>
   );
 };

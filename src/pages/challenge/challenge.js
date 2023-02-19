@@ -3,11 +3,11 @@ import classes from "./challenge.module.css";
 import { ReactComponent as Shuffle } from "../../assets/images/shuffle.svg";
 import { useEffect, useState } from "react";
 import { question } from "../../services/api";
-import useRefreshToken from "../../hooks/useRefreshToken";
 
 const Challenge = () => {
   const [cardData, setCardData] = useState([]);
-  const refresh = useRefreshToken();
+
+  const [isChoosen, setIsChoosen] = useState({});
 
   const getCardDetails = async () => {
     try {
@@ -18,12 +18,16 @@ const Challenge = () => {
       console.log(error);
     }
   };
+  // setIsChoosen(cardData[index]);
 
   useEffect(() => {
     getCardDetails();
     // eslint-disable-next-line
   }, []);
 
+  const showRandom = () => {
+    setIsChoosen(cardData[Math.floor(Math.random() * cardData.length)]);
+  };
   return (
     <div className={classes.main}>
       <button className={classes.shuffle}>
