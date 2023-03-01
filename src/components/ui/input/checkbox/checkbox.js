@@ -21,7 +21,7 @@ const CheckboxLabel = ({ onChange, text }) => {
           label={
             <span
               style={{
-                fontSize: "16px",
+                fontSize: "14px",
                 fontFamily: "Raleway",
               }}
             >

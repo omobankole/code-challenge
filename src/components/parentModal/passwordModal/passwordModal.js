@@ -7,7 +7,7 @@ import { password } from "../../../services/api";
 import CheckboxLabel from "../../ui/input/checkbox/checkbox";
 import { toast } from "react-toastify";
 
-const PasswordModal = ({ setModal, username }) => {
+const PasswordModal = ({ setModal, username, setIsChoosen, showClose }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState();
   const [type, setType] = useState(true);
@@ -41,7 +41,7 @@ const PasswordModal = ({ setModal, username }) => {
     }
   };
   return (
-    <ParentModal setModal={setModal}>
+    <ParentModal setModal={setModal} setIsChoosen={setIsChoosen} showClose={showClose}>
       <form className={classes.main}>
         <div className={classes.content}>
           <h3>Welcome, {username}</h3>
@@ -68,7 +68,13 @@ const PasswordModal = ({ setModal, username }) => {
             name="password"
             size="large"
           />
-          <CheckboxLabel text="Show Password" onChange={() => setType(!type)} />
+          <div>
+            <CheckboxLabel
+              text="Show Password"
+              onChange={() => setType(!type)}
+            />
+          </div>
+
           <button onClick={handleSubmit}>
             {loading ? "Loading" : "Continue"}
           </button>

@@ -8,13 +8,18 @@ import { answer } from "../../../services/api";
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
 
-const QuestionModal = ({ setModal, cardData, answerResp, setAnswerResp }) => {
+const QuestionModal = ({
+  setIsChoosen,
+  setModal,
+  cardData,
+  answerResp,
+  setAnswerResp,
+}) => {
   const [payload, setPayload] = useState({
     answer: "",
   });
 
   const id = cardData.id;
-  console.log(id);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +45,7 @@ const QuestionModal = ({ setModal, cardData, answerResp, setAnswerResp }) => {
   });
   // console.log(status);
   return (
-    <ParentModal setModal={setModal}>
+    <ParentModal setIsChoosen={setIsChoosen}>
       <form className={classes.main}>
         <div>
           <p dangerouslySetInnerHTML={sanitizedData()} />
@@ -80,7 +85,7 @@ const QuestionModal = ({ setModal, cardData, answerResp, setAnswerResp }) => {
           />
           <div className={classes.button}>
             <button onClick={handleSubmit}>Submit</button>
-            {/* <Link to={`/dashboard/scoreboard/game/${id}`}>Solve</Link> */}
+            <Link to={`/dashboard/scoreboard/game/${id}`}>Solve</Link>
           </div>
         </div>
       </form>

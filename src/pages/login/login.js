@@ -18,7 +18,7 @@ const Login = () => {
   const [username, setUserName] = useState("");
   const [loading, setLoading] = useState();
   const [type, setType] = useState(true);
-  const [modal, setModal] = useState(false);
+  const [isChoosen, setIsChoosen] = useState(undefined);
 
   const [payload, setPayload] = useState({
     email: "",
@@ -48,7 +48,7 @@ const Login = () => {
       dispatch({ type: AUTH_ACTIONS.USER, payload: user_id });
 
       if (!jwt.decode(response.data.access).has_changed_password) {
-        setModal(true);
+        setIsChoosen(true);
         setLoading(false);
       } else {
         navigate("/dashboard/challenge");
@@ -78,7 +78,6 @@ const Login = () => {
             label="Email"
             type="email"
             name="email"
-            size="large"
           />
           <Input
             errorMessage="Please enter a valid password"
@@ -88,7 +87,6 @@ const Login = () => {
             isValid={payload.password.length > 3}
             onChange={handleChange}
             name="password"
-            size="large"
           />
           <div className={classes.showPass}>
             <CheckboxLabel
@@ -102,7 +100,7 @@ const Login = () => {
           </button>
         </div>
       </form>
-      {modal && <PasswordModal setModal={setModal} username={username} />}
+      {isChoosen && <PasswordModal setIsChoosen={setIsChoosen} username={username} />}
     </>
   );
 };

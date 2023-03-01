@@ -42,3 +42,12 @@
   background-color: #ffffff;
   color: #124eaf;
 }
+@media screen and (max-width: 550px) {
+  .loginContent p {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .main button:hover {
+    background-color: transparent;
+  }
+}

@@ -2,6 +2,7 @@ import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
 
 const Input = ({
   label,
@@ -17,6 +18,8 @@ const Input = ({
     if (!isValid) setError(true);
     else setError(false);
   };
+  
+  const isMobileMatch = useMediaQuery("(max-width:600px)");
 
   const theme = createTheme({
     palette: {
@@ -33,6 +36,7 @@ const Input = ({
         <FormControl fullWidth>
           <TextField
             color="purple"
+            size="large"
             id={id}
             variant="outlined"
             margin="normal"

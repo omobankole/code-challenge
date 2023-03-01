@@ -7,23 +7,24 @@
   height: 65px;
   padding: 0 40px;
   position: sticky;
+  z-index: 20;
   top: 0;
   left: 0;
 }
-.main nav,
-.main nav a,
+.main .nav,
+.main .nav a,
 .main button {
   display: flex;
   align-items: center;
 }
-.main nav a {
+.main .nav a {
   text-decoration: none;
   color: #000000;
 }
-.main nav a:first-child {
+.main .nav a:not(:last-child) {
   margin-right: 25px;
 }
-.main nav a svg,
+.main .nav a svg,
 .btn .bell {
   margin-right: 10px;
 }
@@ -33,9 +34,61 @@
   background-color: transparent;
   cursor: pointer;
 }
-.main nav a.active {
+.main .nav a.active {
   color: #123eaf;
 }
 .active svg path {
   fill: #123eaf;
+}
+.main .hamburger,
+.main .nav button {
+  display: none;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    padding: 0 30px;
+  }
+  .btn .bell {
+    margin-right: 0;
+  }
+  .btn p {
+    display: none;
+  }
+  .main .hamburger,
+  .main .nav button {
+    display: grid;
+    place-items: center;
+  }
+
+  .main .nav button {
+    margin-bottom: 24px;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+  }
+  .main .nav {
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 70px 0px 0 30px;
+    transition: all 1s ease;
+    transform: translateX(-100%);
+  }
+  .main .nav a:not(:last-child) {
+    margin-bottom: 25px;
+    margin-right: 0;
+  }
+  .main .anime {
+    transform: none;
+  }
 }

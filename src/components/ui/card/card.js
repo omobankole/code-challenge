@@ -5,14 +5,30 @@ import QuestionModal from "../../parentModal/questionModal/questionModal";
 import Check from "../../../assets/images/check.svg";
 import classes from "./card.module.css";
 
-const Card = ({ category, name, cardData, index, is_solved }) => {
+const Card = ({
+  category,
+  name,
+  cardData,
+  index,
+  is_solved,
+  setIsChoosen,
+  isChoosen,
+  id,
+}) => {
   const [modal, setModal] = useState("");
   const [answerResp, setAnswerResp] = useState({});
 
+  const handleSelect = () => {
+    setModal("question");
+    console.log(id);
+    setIsChoosen(id);
+  };
+
   return (
     <>
-      {modal === "question" && (
+      {isChoosen === id && (
         <QuestionModal
+          setIsChoosen={setIsChoosen}
           setModal={setModal}
           cardData={cardData[index]}
           answerResp={answerResp}
@@ -30,7 +46,7 @@ const Card = ({ category, name, cardData, index, is_solved }) => {
         />
       )}
 
-      <div className={classes.main} onClick={() => setModal("question")}>
+      <div className={classes.main} onClick={handleSelect}>
         <p className={classes.complex}>
           {category === "H" ? "Hard" : category === "M" ? "Medium" : "Easy"}
         </p>

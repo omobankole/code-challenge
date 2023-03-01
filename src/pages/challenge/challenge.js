@@ -8,8 +8,7 @@ import useRefreshToken from "../../hooks/useRefreshToken";
 const Challenge = () => {
   const apiSdk = useApiSdk();
   const [cardData, setCardData] = useState([]);
-
-  const [isChoosen, setIsChoosen] = useState({});
+  const [isChoosen, setIsChoosen] = useState();
 
   const getCardDetails = async () => {
     try {
@@ -20,7 +19,6 @@ const Challenge = () => {
       console.log(error);
     }
   };
-  // setIsChoosen(cardData[index]);
 
   useEffect(() => {
     getCardDetails();
@@ -28,11 +26,14 @@ const Challenge = () => {
   }, []);
 
   const showRandom = () => {
-    setIsChoosen(cardData[Math.floor(Math.random() * cardData.length)]);
+    const random = Math.ceil(Math.random() * cardData.length);
+    console.log(random);
+    setIsChoosen(random);
   };
+
   return (
     <div className={classes.main}>
-      <button className={classes.shuffle}>
+      <button className={classes.shuffle} onClick={showRandom}>
         <Shuffle /> Pick Random
       </button>
       <div className={classes.card}>
@@ -43,6 +44,8 @@ const Challenge = () => {
             index={i}
             setCardData={setCardData}
             cardData={cardData}
+            setIsChoosen={setIsChoosen}
+            isChoosen={isChoosen}
           />
         ))}
       </div>

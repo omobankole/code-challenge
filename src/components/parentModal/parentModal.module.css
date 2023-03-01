@@ -33,4 +33,12 @@
 .close:hover {
   transform: scale(1.1);
 }
-
+@media screen and (max-width: 768px) {
+  .modal {
+    background-color: #fff;
+  }
+  .box {
+    display: unset;
+    position: unset;
+  }
+}
