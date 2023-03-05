@@ -5,8 +5,7 @@ import { ReactComponent as NoBell } from "../../assets/images/No Bell.svg";
 import { useEffect, useState } from "react";
 import { deleteNot, notificationApi } from "../../services/api";
 
-
-const Notification = ({ setShowNotify }) => {
+const Notification = ({ setShowNotify, showNotify }) => {
   const [messages, setMessages] = useState([]);
 
   const getNotification = async () => {
@@ -33,7 +32,9 @@ const Notification = ({ setShowNotify }) => {
   }, []);
 
   return (
-    <div className={classes.main}>
+    <div
+      className={`${classes.main} ${showNotify && classes.slideNotification}`}
+    >
       {messages.length < 1 ? (
         <div className={classes.noNotify}>
           <NoBell />

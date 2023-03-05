@@ -5,6 +5,9 @@
   border-radius: 16px;
   transition: all 0.5s ease-out;
   text-align: center;
+  border: 1px solid rgba(18, 78, 175, 0.2);
+  box-shadow: 0px 2px 17px 6px rgba(18, 78, 175, 0.25);
+  border-radius: 8px;
 }
 .main p {
   font-size: 20px;
@@ -26,4 +29,27 @@
   background: #ffffff;
   color: #124eaf;
   font-weight: 500;
+}
+
+@media screen and (max-width: 1024px) {
+  .main {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .main {
+    width: 87%;
+  }
+  .main svg {
+    width: 38px;
+    height: 38px;
+  }
+  .main p {
+    font-size: 18px;
+  }
+  .main button {
+    width: 60%;
+    font-size: 15px;
+    padding: 15px 10px;
+  }
 }

@@ -7,42 +7,48 @@ import { ReactComponent as Hamburger } from "../../../assets/images/hamburger.sv
 import { ReactComponent as Cancel } from "../../../assets/images/cancel.svg";
 import { useState } from "react";
 
-const Header = ({ setShowNotify }) => {
+const Header = ({ setShowNotify, showNotify }) => {
   const [showNav, setShowNav] = useState(false);
+  const handleOpen = () => {
+    setShowNotify(false);
+    setShowNav(true);
+  };
 
   return (
-    <header className={classes.main}>
-      <button className={classes.hamburger} onClick={() => setShowNav(true)}>
-        <Hamburger />
-      </button>
-      <nav className={`${classes.nav} ${showNav && classes.anime}`}>
-        <button onClick={() => setShowNav(false)}>
-          <Cancel />
+    <header>
+      <div className={classes.main}>
+        <button className={classes.hamburger} onClick={handleOpen}>
+          <Hamburger />
         </button>
-        <NavLink
-          onClick={() => setShowNav(false)}
-          to="/dashboard/challenge"
-          className={({ isActive }) => (isActive ? classes.active : "")}
+        <nav className={`${classes.nav} ${showNav && classes.anime}`}>
+          <button onClick={() => setShowNav(false)}>
+            <Cancel />
+          </button>
+          <NavLink
+            onClick={() => setShowNav(false)}
+            to="/dashboard/challenge"
+            className={({ isActive }) => (isActive ? classes.active : "")}
+          >
+            <Question />
+            Challenge
+          </NavLink>
+          <NavLink
+            onClick={() => setShowNav(false)}
+            to="/dashboard/scoreboard"
+            className={({ isActive }) => (isActive ? classes.active : "")}
+          >
+            <Score />
+            Scoreboard
+          </NavLink>
+        </nav>
+        <button
+          className={`${classes.btn} ${showNotify && classes.btnActive}`}
+          onClick={() => setShowNotify((prev) => !prev)}
         >
-          <Question />
-          Challenge
-        </NavLink>
-        <NavLink
-          onClick={() => setShowNav(false)}
-          to="/dashboard/scoreboard"
-          className={({ isActive }) => (isActive ? classes.active : "")}
-        >
-          <Score />
-          Scoreboard
-        </NavLink>
-      </nav>
-      <button
-        className={classes.btn}
-        onClick={() => setShowNotify((prev) => !prev)}
-      >
-        <Bell className={classes.bell} />
-        <p>Notification</p>
-      </button>
+          <Bell className={classes.bell} />
+          <p>Notification</p>
+        </button>
+      </div>
     </header>
   );
 };

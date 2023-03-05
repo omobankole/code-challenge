@@ -35,10 +35,11 @@ const Card = ({
           setAnswerResp={setAnswerResp}
         />
       )}
-      {modal === "answer" && answerResp.status && (
+      {modal === "answer" && (
         <SuccessModal setModal={setModal} cardData={cardData[index]} />
       )}
-      {modal === "error" && !answerResp.status && (
+
+      {modal === "error" && (
         <ErrorModal
           setModal={setModal}
           cardData={cardData[index]}
@@ -46,7 +47,10 @@ const Card = ({
         />
       )}
 
-      <div className={classes.main} onClick={handleSelect}>
+      <div
+        className={`${classes.main} ${is_solved && classes.blueBg}`}
+        onClick={handleSelect}
+      >
         <p className={classes.complex}>
           {category === "H" ? "Hard" : category === "M" ? "Medium" : "Easy"}
         </p>

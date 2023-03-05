@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import AuthProvider, { AuthContext } from "./context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
+import "animate.css";
 import { ToastContainer } from "react-toastify";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

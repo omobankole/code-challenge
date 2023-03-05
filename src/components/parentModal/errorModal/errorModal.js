@@ -5,7 +5,9 @@ import ParentModal from "../parentModal";
 const ErrorModal = ({ setModal, answerResp }) => {
   return (
     <ParentModal>
-      <div className={classes.main}>
+      <div
+        className={`${classes.main} animate__animated animate__animated animate__jackInTheBox`}
+      >
         <Error />
         <p>
           Oops!! <br /> {answerResp.message}

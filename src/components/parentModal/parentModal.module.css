@@ -21,8 +21,8 @@
   position: absolute;
   top: 5px;
   right: 18%;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
   z-index: 99;
   background: transparent;
   transition: 0.5s ease-out;
@@ -30,15 +30,47 @@
   outline: none;
   cursor: pointer;
 }
+.close img:nth-child(2),
+.close p {
+  display: none;
+}
 .close:hover {
   transform: scale(1.1);
 }
+@media screen and (max-width: 1024px) {
+  .close {
+    top: 10px;
+    right: 14%;
+  }
+}
 @media screen and (max-width: 768px) {
+  .fadeBg {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
+  .boxTwo {
+    position: relative !important;
+    display: grid !important;
+  }
   .modal {
     background-color: #fff;
   }
   .box {
     display: unset;
     position: unset;
+  }
+  .close p {
+    margin-left: 5px;
+    font-size: 18px;
+  }
+  .close img:nth-child(2),
+  .close p {
+    display: block;
+  }
+  .close img:nth-child(1) {
+    display: none;
+  }
+  .close {
+    top: 30px;
+    left: 20px;
   }
 }

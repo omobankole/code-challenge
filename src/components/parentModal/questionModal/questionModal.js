@@ -14,7 +14,9 @@ const QuestionModal = ({
   cardData,
   answerResp,
   setAnswerResp,
+  showClose,
 }) => {
+  const [loading, setLoading] = useState(false);
   const [payload, setPayload] = useState({
     answer: "",
   });
@@ -25,17 +27,21 @@ const QuestionModal = ({
     e.preventDefault();
     console.log(payload);
     try {
+      setLoading(true);
       const response = await answer(id, payload);
       setAnswerResp(response.data);
       console.log(response.data);
-      if (!answerResp.status) {
-        console.log("Yeeeh");
-        setModal("error");
-      } else {
-        console.log("ooops");
+      setLoading(false);
+      setIsChoosen(undefined);
+      if (answerResp.message === "Answer is Correct") {
+        console.log("success");
         setModal("answer");
+      } else {
+        console.log("failed");
+        setModal("error");
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -45,8 +51,10 @@ const QuestionModal = ({
   });
   // console.log(status);
   return (
-    <ParentModal setIsChoosen={setIsChoosen}>
-      <form className={classes.main}>
+    <ParentModal setIsChoosen={setIsChoosen} showClose={!showClose}>
+      <form
+        className={`${classes.main} animate__animated animate__animated animate__fadeInLeftBig`}
+      >
         <div>
           <p dangerouslySetInnerHTML={sanitizedData()} />
 
@@ -84,8 +92,10 @@ const QuestionModal = ({
             }
           />
           <div className={classes.button}>
-            <button onClick={handleSubmit}>Submit</button>
-            <Link to={`/dashboard/scoreboard/game/${id}`}>Solve</Link>
+            <button onClick={handleSubmit}>
+              {loading ? "Loading" : "Submit"}
+            </button>
+            <Link to={`/dashboard/scoreboard/game/${id}`}>Solves</Link>
           </div>
         </div>
       </form>

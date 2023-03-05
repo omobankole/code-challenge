@@ -1,6 +1,6 @@
 import classes from "./scoreboard2.module.css";
-import Rank from "../../assets/images/rank.png";
-import User from "../../assets/images/users.png";
+import Rank from "../../assets/images/rank.svg";
+import User from "../../assets/images/user.svg";
 import { solves, useApiSdk } from "../../services/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";

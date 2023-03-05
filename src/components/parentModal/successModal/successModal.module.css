@@ -4,7 +4,12 @@
   background: #ffffff;
   border-radius: 16px;
   transition: all 0.5s ease-out;
+  display: grid;
+  place-items: center;
   text-align: center;
+  border: 1px solid rgba(18, 78, 175, 0.2);
+  box-shadow: 0px 2px 17px 6px rgba(18, 78, 175, 0.25);
+  border-radius: 8px;
 }
 .main p {
   font-size: 20px;
@@ -32,4 +37,31 @@
   align-items: center;
   font-size: 20px;
   color: #909090;
+}
+.main .coin svg {
+  margin-right: 8px;
+}
+
+@media screen and (max-width: 1024px) {
+  .main {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .main {
+    width: 87%;
+  }
+  .main .coin svg {
+    width: 38px;
+    height: 38px;
+  }
+  .main p {
+    font-size: 18px;
+    margin-top: 0px;
+  }
+  .main button {
+    width: 60%;
+    font-size: 15px;
+    padding: 15px 10px;
+  }
 }

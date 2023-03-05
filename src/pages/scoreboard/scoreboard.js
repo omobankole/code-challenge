@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import classes from "../scoreboard/scoreboard.module.css";
 // import { ReactComponent as Rank } from '../../assets/images/rank.png'
-import Rank from "../../assets/images/rank.png";
-import User from "../../assets/images/users.png";
-import Point from "../../assets/images/point.png";
+import Rank from "../../assets/images/rank.svg";
+import User from "../../assets/images/user.svg";
+import Point from "../../assets/images/point.svg";
 import { useApiSdk, user } from "../../services/api";
 
 const Scoreboard = () => {
@@ -11,6 +11,7 @@ const Scoreboard = () => {
   const [users, setUsers] = useState([]);
 
   const sdk = useApiSdk();
+  const newName = localStorage.getItem("username");
 
   const getUsers = async () => {
     try {

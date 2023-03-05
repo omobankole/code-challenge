@@ -1,13 +1,17 @@
-.main {
+header {
   width: 100%;
-  display: flex;
+  position: sticky;
   background-color: #ffffff;
+  box-shadow: 0 4px 24px rgb(0 0 0 / 4%);
+  z-index: 20;
+}
+.main {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   height: 65px;
-  padding: 0 40px;
-  position: sticky;
-  z-index: 20;
   top: 0;
   left: 0;
 }
@@ -20,6 +24,8 @@
 .main .nav a {
   text-decoration: none;
   color: #000000;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
 }
 .main .nav a:not(:last-child) {
   margin-right: 25px;
@@ -28,16 +34,26 @@
 .btn .bell {
   margin-right: 10px;
 }
+.main .nav a.active {
+  color: #123eaf;
+}
+.active svg path {
+  fill: #123eaf;
+}
 .btn {
   border: none;
   outline: none;
   background-color: transparent;
   cursor: pointer;
 }
-.main .nav a.active {
-  color: #123eaf;
+.btn p {
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
 }
-.active svg path {
+.btnActive p {
+  color: #123eaf !important;
+}
+.btnActive svg path {
   fill: #123eaf;
 }
 .main .hamburger,
@@ -47,11 +63,7 @@
   border: none;
   outline: none;
 }
-
 @media screen and (max-width: 768px) {
-  .main {
-    padding: 0 30px;
-  }
   .btn .bell {
     margin-right: 0;
   }
@@ -81,7 +93,7 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 70px 0px 0 30px;
-    transition: all 1s ease;
+    transition: all 0.5s ease;
     transform: translateX(-100%);
   }
   .main .nav a:not(:last-child) {

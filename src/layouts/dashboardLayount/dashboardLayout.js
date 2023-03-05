@@ -14,10 +14,11 @@ const DashboardLayout = () => {
 
   return (
     <div className={classes.main}>
-      <Header setShowNotify={setShowNotify} />
+      <Header setShowNotify={setShowNotify} showNotify={showNotify} />
       <div className={classes.content}>
         <Outlet />
-        {showNotify && <Notification setShowNotify={setShowNotify} />}
+        {/* {showNotify && <Notification setShowNotify={setShowNotify} />} */}
+        <Notification setShowNotify={setShowNotify} showNotify={showNotify} />
       </div>
     </div>
   );
