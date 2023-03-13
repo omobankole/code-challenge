@@ -49,9 +49,10 @@ const QuestionModal = ({
   const sanitizedData = () => ({
     __html: DOMPurify.sanitize(cardData.description),
   });
-  // console.log(status);
+
+
   return (
-    <ParentModal setIsChoosen={setIsChoosen} showClose={!showClose}>
+    <ParentModal setIsChoosen={setIsChoosen} showClose>
       <form
         className={`${classes.main} animate__animated animate__animated animate__fadeInLeftBig`}
       >
@@ -74,6 +75,8 @@ const QuestionModal = ({
               <SyntaxHighlighter
                 children={cardData.code}
                 language="javascript"
+                wrapLines={true}
+                className={classes.highlight}
                 showLineNumbers={true}
                 style={coldarkCold}
               />

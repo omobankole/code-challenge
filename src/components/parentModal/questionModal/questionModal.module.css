@@ -6,8 +6,25 @@
   transition: all 0.5s ease-out;
 }
 .code {
+  max-height: 300px;
+  overflow-y: auto;
   margin-top: 25px;
   border: 0.901667px solid rgba(18, 78, 175, 0.2);
+}
+.code > .highlight {
+  height: 100%;
+  width: 100%;
+}
+.code::-webkit-scrollbar {
+  height: 5px;
+  width: 0.5em;
+}
+.code::-webkit-scrollbar-thumb {
+  background-color: hsla(0, 0%, 100%, 0.4);
+  border-radius: 4px;
+}
+.code::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.15);
 }
 .main input {
   width: 100%;
@@ -76,8 +93,21 @@
 @media screen and (max-width: 768px) {
   .main {
     width: 100%;
+    max-height: 90vh;
     margin-top: 70px;
-    padding: 20px 20px 0;
+    padding: 20px 20px 50px;
+    overflow-y: auto;
+  }
+  z .main::-webkit-scrollbar {
+    height: 5px;
+    width: 0.5em;
+  }
+  .main::-webkit-scrollbar-thumb {
+    background-color: hsla(0, 0%, 100%, 0.4);
+    border-radius: 4px;
+  }
+  .main::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.15);
   }
 }
 @media screen and (max-width: 500px) {
@@ -90,7 +120,7 @@
     width: 100%;
     margin: 40px 0 30px;
   }
-  .button a{
+  .button a {
     padding: 5px 15px;
   }
 }
