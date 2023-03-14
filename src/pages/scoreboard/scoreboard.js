@@ -10,6 +10,7 @@ import Skeleton from "react-loading-skeleton";
 const Scoreboard = () => {
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
+  const newName = localStorage.getItem("username");
   const sdk = useApiSdk();
 
   const getUsers = async () => {
@@ -29,7 +30,7 @@ const Scoreboard = () => {
 
   const body = [];
   users.forEach((user, index) =>
-    body.push([index + 1, user.username, `${user.user_score} pts`])
+    body.push([index + 1, user.username === newName ? "You" : user.username, `${user.user_score} pts`])
   );
 
   return (

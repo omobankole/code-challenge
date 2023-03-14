@@ -8,6 +8,8 @@ import { ReactComponent as Cancel } from "../../../assets/images/cancel.svg";
 import { useState } from "react";
 
 const Header = ({ setShowNotify, showNotify }) => {
+  const userName = localStorage.getItem("username");
+  const newUser = userName[0]
   const [showNav, setShowNav] = useState(false);
   const handleOpen = () => {
     setShowNotify(false);
@@ -41,13 +43,16 @@ const Header = ({ setShowNotify, showNotify }) => {
             Scoreboard
           </NavLink>
         </nav>
-        <button
-          className={`${classes.btn} ${showNotify && classes.btnActive}`}
-          onClick={() => setShowNotify((prev) => !prev)}
-        >
-          <Bell className={classes.bell} />
-          <p>Notification</p>
-        </button>
+        <div className={classes.userLogo}>
+          <button
+            className={`${classes.btn} ${showNotify && classes.btnActive}`}
+            onClick={() => setShowNotify((prev) => !prev)}
+          >
+            <Bell className={classes.bell} />
+            <p>Notification</p>
+          </button>
+          <p className={classes.username}>{newUser}</p>
+        </div>
       </div>
     </header>
   );

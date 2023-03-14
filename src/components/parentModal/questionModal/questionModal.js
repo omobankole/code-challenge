@@ -33,12 +33,12 @@ const QuestionModal = ({
       console.log(response.data);
       setLoading(false);
       setIsChoosen(undefined);
-      if (answerResp.message === "Answer is Correct") {
-        console.log("success");
-        setModal("answer");
-      } else {
+      if (!response.data.status) {
         console.log("failed");
         setModal("error");
+      } else {
+        console.log("success");
+        setModal("answer");
       }
     } catch (error) {
       setLoading(false);
@@ -49,7 +49,6 @@ const QuestionModal = ({
   const sanitizedData = () => ({
     __html: DOMPurify.sanitize(cardData.description),
   });
-
 
   return (
     <ParentModal setIsChoosen={setIsChoosen} showClose>
