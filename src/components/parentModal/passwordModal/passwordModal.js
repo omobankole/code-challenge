@@ -3,12 +3,13 @@ import ParentModal from "../parentModal";
 import Input from "../../ui/input/input";
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { password } from "../../../services/api";
+import { password, useApiSdk } from "../../../services/api";
 import CheckboxLabel from "../../ui/input/checkbox/checkbox";
 import { toast } from "react-toastify";
 
 const PasswordModal = ({ setModal, username, setIsChoosen, showClose }) => {
   const navigate = useNavigate();
+  const sdk = useApiSdk();
   const [loading, setLoading] = useState();
   const [type, setType] = useState(true);
   const [payload, setPayload] = useState({
@@ -31,7 +32,7 @@ const PasswordModal = ({ setModal, username, setIsChoosen, showClose }) => {
     console.log(data);
     try {
       setLoading(true);
-      const response = await password(data);
+      const response = await sdk.password(data);
       navigate("/dashboard/challenge");
       setLoading(false);
     } catch (error) {
@@ -41,7 +42,11 @@ const PasswordModal = ({ setModal, username, setIsChoosen, showClose }) => {
     }
   };
   return (
-    <ParentModal setModal={setModal} setIsChoosen={setIsChoosen} showClose={showClose}>
+    <ParentModal
+      setModal={setModal}
+      setIsChoosen={setIsChoosen}
+      showClose={showClose}
+    >
       <form className={classes.main}>
         <div className={classes.content}>
           <h3>Welcome, {username}</h3>

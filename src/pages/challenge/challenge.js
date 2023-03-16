@@ -4,30 +4,17 @@ import { ReactComponent as Shuffle } from "../../assets/images/shuffle.svg";
 import { useEffect, useState } from "react";
 import { useApiSdk } from "../../services/api";
 import SkeletonCard from "../../components/ui/card/skeletonCard";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useQuery } from "react-query";
 
 const Challenge = () => {
   const apiSdk = useApiSdk();
-  const [cardData, setCardData] = useState([]);
+  const width = useMediaQuery();
   const [isChoosen, setIsChoosen] = useState();
-  const [loading, setLoading] = useState(false);
-
-  const getCardDetails = async () => {
-    try {
-      setLoading(true);
-      const response = await apiSdk.question();
-      setCardData(response.data.results);
-      console.log(response.data.results);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getCardDetails();
-    // eslint-disable-next-line
-  }, []);
+  const { isLoading, data, isFetching } = useQuery("challlenge", () => apiSdk.question());
+  const cardData = data?.data.results;
+  console.log(cardData);
+  console.log({isLoading, isFetching})
 
   const showRandom = () => {
     const random = Math.ceil(Math.random() * cardData.length);
@@ -38,15 +25,16 @@ const Challenge = () => {
   return (
     <div className={classes.main}>
       <button className={classes.shuffle} onClick={showRandom}>
-        <Shuffle /> Pick Random
+        <Shuffle />
+        {width > 768 ? "Pick Random" : "Shuffle"}
       </button>
       <div className={classes.card}>
-        {loading ? (
+        {isLoading ? (
           <>
             {Array(6)
               .fill(undefined)
               .map((item, i) => (
-                <SkeletonCard {...item} loading={loading} key={i} index={i} />
+                <SkeletonCard {...item} isLoading={isLoading} key={i} index={i} />
               ))}
           </>
         ) : (
@@ -56,7 +44,6 @@ const Challenge = () => {
                 {...item}
                 key={i}
                 index={i}
-                setCardData={setCardData}
                 cardData={cardData}
                 setIsChoosen={setIsChoosen}
                 isChoosen={isChoosen}

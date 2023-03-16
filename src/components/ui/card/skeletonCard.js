@@ -1,9 +1,9 @@
 import classes from "./card.module.css";
 import Skeleton from "react-loading-skeleton";
 
-const SkeletonCard = ({ loading }) => {
+const SkeletonCard = ({ isLoading }) => {
   return (
-    <div className={`${classes.main} ${loading && classes.skeleton}`}>
+    <div className={`${classes.main} ${isLoading && classes.skeleton}`}>
       <p className={classes.complex}>
         <Skeleton width={70} duration={1} />
       </p>

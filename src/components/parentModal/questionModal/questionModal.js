@@ -4,7 +4,7 @@ import classes from "./questionModal.module.css";
 import { ReactComponent as Download } from "../../../assets/images/download.svg";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { answer } from "../../../services/api";
+import { answer, useApiSdk } from "../../../services/api";
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
 
@@ -16,6 +16,7 @@ const QuestionModal = ({
   setAnswerResp,
   showClose,
 }) => {
+  const sdk = useApiSdk()
   const [loading, setLoading] = useState(false);
   const [payload, setPayload] = useState({
     answer: "",
@@ -28,7 +29,7 @@ const QuestionModal = ({
     console.log(payload);
     try {
       setLoading(true);
-      const response = await answer(id, payload);
+      const response = await sdk.answer(id, payload);
       setAnswerResp(response.data);
       console.log(response.data);
       setLoading(false);

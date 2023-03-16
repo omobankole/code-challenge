@@ -75,6 +75,7 @@ header {
   border-radius: 50%;
   background: #f0e9ff;
   margin-left: 8px;
+  text-transform: uppercase;
 }
 @media screen and (max-width: 768px) {
   .btn .bell {

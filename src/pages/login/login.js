@@ -13,7 +13,7 @@ import { AUTH_ACTIONS, useAuthContext } from "../../context/AuthContext";
 const Login = () => {
   const navigate = useNavigate();
   const { dispatch } = useAuthContext();
-  const sdk = useApiSdk();
+  //const sdk = useApiSdk();
 
   const [username, setUserName] = useState("");
   const [loading, setLoading] = useState();
@@ -36,8 +36,8 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      // const response = await login(payload);
-      const response = await sdk.login(payload);
+      const response = await login(payload);
+      // const response = await sdk.login(payload);
 
       dispatch({ type: AUTH_ACTIONS.AUTH, payload: response.data });
 
@@ -100,7 +100,9 @@ const Login = () => {
           </button>
         </div>
       </form>
-      {isChoosen && <PasswordModal setIsChoosen={setIsChoosen} username={username} />}
+      {isChoosen && (
+        <PasswordModal setIsChoosen={setIsChoosen} username={username} />
+      )}
     </>
   );
 };

@@ -3,39 +3,52 @@ import { ReactComponent as Clear } from "../../assets/images/delete.svg";
 import { ReactComponent as Notify } from "../../assets/images/smalll-bell.svg";
 import { ReactComponent as NoBell } from "../../assets/images/No Bell.svg";
 import { useEffect, useState } from "react";
-import { deleteNot, notificationApi } from "../../services/api";
+import { deleteNot, notificationApi, useApiSdk } from "../../services/api";
+import { useQuery } from "react-query";
 
 const Notification = ({ setShowNotify, showNotify }) => {
-  const [messages, setMessages] = useState([]);
+  const sdk = useApiSdk();
+  // const [messages, setMessages] = useState([]);
 
-  const getNotification = async () => {
-    try {
-      const response = await notificationApi();
-      console.log(response);
-      setMessages(response.data.notifications);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const deleteMessage = async () => {
-    try {
-      const response = await deleteNot();
-      console.log(response);
-      setMessages([]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getNotification = async () => {
+  //   try {
+  //     const response = await notificationApi();
+  //     console.log(response);
+  //     setMessages(response.data.notifications);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // const deleteMessage = async () => {
+  //   try {
+  //     const response = await deleteNot();
+  //     console.log(response);
+  //     setMessages([]);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getNotification();
-  }, []);
+  // useEffect(() => {
+  //   getNotification();
+  // }, []);
+
+  const { isLoading, data } = useQuery(
+    "notification",
+    () => sdk.notificationApi(),
+    {
+      refetchInterval: 1000,
+      refetchIntervalInBackground: true,
+    }
+  );
+  const messages = data?.data.notifications;
+  // console.log(messages);
 
   return (
     <div
       className={`${classes.main} ${showNotify && classes.slideNotification}`}
     >
-      {messages.length < 1 ? (
+      {messages?.length < 1 ? (
         <div className={classes.noNotify}>
           <NoBell />
           <h3>No notifications yet</h3>
@@ -43,12 +56,12 @@ const Notification = ({ setShowNotify, showNotify }) => {
         </div>
       ) : (
         <>
-          <button className={classes.clear} onClick={deleteMessage}>
+          <button className={classes.clear}>
             Clear All
             <Clear />
           </button>
           <div className={classes.inboxScroll}>
-            {messages.map((item, i) => (
+            {messages?.map((item, i) => (
               <div className={classes.inbox} key={i}>
                 <span>
                   <Notify />
